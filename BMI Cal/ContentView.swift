@@ -10,7 +10,49 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello World")
+        
+        VStack {
+            HStack {
+                Text("BMI Calculator")
+            }
+            
+            HStack{
+                RoundRect()
+                    .padding(.leading)
+            
+                Spacer()
+                
+                RoundRect()
+                    .padding(.trailing)
+            }
+            
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.gray)
+                .frame(height: 100)
+                .padding(.top)
+                .padding(.leading)
+                .padding(.trailing)
+                .padding(.bottom)
+            //Spacer()
+            
+            HStack{
+                RoundRect()
+                    .padding(.leading)
+                
+                Spacer()
+                
+                RoundRect()
+                    .padding(.trailing)
+            }
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                
+                
+                Rectangle()
+                .frame(height: 50)
+            
+            }
+        }
+        
     }
 }
 
@@ -21,3 +63,12 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 #endif
+
+struct RoundRect: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 30)
+            .fill(Color.gray)
+            .frame(width: 180, height: 250)
+            .padding(.bottom)
+    }
+}
