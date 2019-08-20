@@ -17,6 +17,7 @@ struct ContentView: View {
     @State var selected2 = false
     
     var body: some View {
+        
         VStack {
             HStack {
                 Text("BMI Calculator")
@@ -30,15 +31,16 @@ struct ContentView: View {
             HStack{
                 VStack {
                     Image("male")
-                        .opacity(0.3)
+                        .animation(.interactiveSpring())
+                        .opacity(selected1 ? 1 : 0.3)
                         .scaleEffect(0.099)
                         .frame(width: 100, height: 150)
                     Text("Male")
-                        .opacity(0.3)
                         .font(.title)
                         .fontWeight(.semibold)
                 }
                 .frame(width: 180, height: 250)
+                .animation(.interactiveSpring())
                 .background(selected2 ? Color("lightGray") : Color.gray)
                 .cornerRadius(20)
                 .shadow(radius: selected2 ? 0 : 30)
@@ -56,6 +58,8 @@ struct ContentView: View {
                 
                 VStack {
                     Image("female")
+                        .animation(.interactiveSpring())
+                        .opacity(selected2 ? 1 : 0.3)
                         .scaleEffect(0.099)
                         .frame(width: 100, height: 150)
                     Text("Female")
@@ -63,6 +67,7 @@ struct ContentView: View {
                         .fontWeight(.semibold)
                 }
                 .frame(width: 180, height: 250)
+                .animation(.interactiveSpring())
                 .background(selected1 ? Color("lightGray") : Color.gray)
                 .cornerRadius(20)
                 .shadow(radius: selected1 ? 0 : 30)
@@ -82,8 +87,10 @@ struct ContentView: View {
                 
                 HStack(alignment: .bottom) {
                     numericText(num: "\(self.sliderVal)")
+                        .animation(.easeIn)
+                        .animation(.easeInOut(duration: 10))
                         .foregroundColor(Color.red)
-                    
+                        
                     Text("cm")
                         .font(.headline)
                 }
@@ -161,7 +168,7 @@ struct ContentView: View {
             }
             
             Button(action: {
-                //print("\(self.sliderVal)")
+                print("\(self.sliderVal)")
                 print("Button tapped")
             }) {
                 Text("CALCULATE YOUR BMI")
@@ -176,6 +183,10 @@ struct ContentView: View {
             }
             
         }
+    .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
+        .padding(.top, 40)
+            
         
     }
 }
@@ -187,18 +198,6 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 #endif
-
-struct RoundRect: View {
-    var body: some View {
-        VStack {
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color.gray)
-                .frame(width: 180, height: 250)
-                .padding(.bottom)
-            EmptyView()
-        }
-    }
-}
 
 struct TitleText: View {
     var title = "HEIGHT"
@@ -216,5 +215,7 @@ struct numericText: View {
             .font(.system(size: 45))
             .font(.largeTitle)
             .fontWeight(.heavy)
+            .animation(.spring())
+        
     }
 }

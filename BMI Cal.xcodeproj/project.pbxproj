@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		034DBDCD230C43E00094834D /* ResultPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DBDCC230C43E00094834D /* ResultPage.swift */; };
 		0388B102230ACA67006ED2B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388B101230ACA67006ED2B6 /* AppDelegate.swift */; };
 		0388B104230ACA67006ED2B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388B103230ACA67006ED2B6 /* SceneDelegate.swift */; };
 		0388B106230ACA67006ED2B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0388B105230ACA67006ED2B6 /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		034DBDCC230C43E00094834D /* ResultPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPage.swift; sourceTree = "<group>"; };
 		0388B0FE230ACA67006ED2B6 /* BMI Cal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BMI Cal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0388B101230ACA67006ED2B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0388B103230ACA67006ED2B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				0388B101230ACA67006ED2B6 /* AppDelegate.swift */,
 				0388B103230ACA67006ED2B6 /* SceneDelegate.swift */,
 				0388B105230ACA67006ED2B6 /* ContentView.swift */,
+				034DBDCC230C43E00094834D /* ResultPage.swift */,
 				0388B107230ACA6C006ED2B6 /* Assets.xcassets */,
 				0388B10C230ACA6C006ED2B6 /* LaunchScreen.storyboard */,
 				0388B10F230ACA6C006ED2B6 /* Info.plist */,
@@ -149,6 +152,7 @@
 				0388B102230ACA67006ED2B6 /* AppDelegate.swift in Sources */,
 				0388B104230ACA67006ED2B6 /* SceneDelegate.swift in Sources */,
 				0388B106230ACA67006ED2B6 /* ContentView.swift in Sources */,
+				034DBDCD230C43E00094834D /* ResultPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
