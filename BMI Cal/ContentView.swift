@@ -9,48 +9,172 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var sliderVal: Double
+    @State var age: Int
+    @State var weight: Int
+    @State var selected1 = false
+    @State var selected2 = false
+    
     var body: some View {
-        
         VStack {
             HStack {
                 Text("BMI Calculator")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .padding(.top)
+                    .padding(.leading)
+                Spacer()
             }
             
             HStack{
-                RoundRect()
-                    .padding(.leading)
-            
-                Spacer()
-                
-                RoundRect()
-                    .padding(.trailing)
-            }
-            
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.gray)
-                .frame(height: 100)
-                .padding(.top)
+                VStack {
+                    Image("male")
+                        .opacity(0.3)
+                        .scaleEffect(0.099)
+                        .frame(width: 100, height: 150)
+                    Text("Male")
+                        .opacity(0.3)
+                        .font(.title)
+                        .fontWeight(.semibold)
+                }
+                .frame(width: 180, height: 250)
+                .background(selected2 ? Color("lightGray") : Color.gray)
+                .cornerRadius(20)
+                .shadow(radius: selected2 ? 0 : 30)
                 .padding(.leading)
+                .onTapGesture {
+                    if self.selected1 == true {
+                        self.selected2 = true
+                        self.selected1 = false
+                    } else {
+                        self.selected2 = true
+                    }
+                }
+            
+                Spacer()
+                
+                VStack {
+                    Image("female")
+                        .scaleEffect(0.099)
+                        .frame(width: 100, height: 150)
+                    Text("Female")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                }
+                .frame(width: 180, height: 250)
+                .background(selected1 ? Color("lightGray") : Color.gray)
+                .cornerRadius(20)
+                .shadow(radius: selected1 ? 0 : 30)
                 .padding(.trailing)
-                .padding(.bottom)
-            //Spacer()
+                .onTapGesture {
+                    if self.selected2 == true {
+                        self.selected1 = true
+                        self.selected2 = false
+                    } else {
+                        self.selected1 = true
+                    }
+                }
+            }
+            
+            VStack {
+                TitleText()
+                
+                HStack(alignment: .bottom) {
+                    numericText(num: "\(self.sliderVal)")
+                        .foregroundColor(Color.red)
+                    
+                    Text("cm")
+                        .font(.headline)
+                }
+                
+                Slider(value: $sliderVal, in: 0.0...250.0, step: 0.5)
+                    .frame(width: 300)
+                    .padding(.bottom)
+            }
+            .frame(minWidth: 0, maxWidth: .some(400))
+            .background(Color.gray)
+            .cornerRadius(20)
+            .shadow(radius: 10)
             
             HStack{
-                RoundRect()
-                    .padding(.leading)
+                
+                VStack(alignment: .center){
+                    TitleText(title: "WEIGHT")
+                        
+                    numericText(num: "\(self.weight)")
+                    
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .scaleEffect(2)
+                            .padding()
+                            .onTapGesture {
+                                self.weight -= 1
+                            }
+                        
+                        Image(systemName: "plus.circle.fill")
+                            .scaleEffect(2)
+                            .padding()
+                            .onTapGesture {
+                                self.weight += 1
+                            }
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.top)
+                .frame(width: 180, height: 250)
+                .background(Color.gray)
+                .cornerRadius(15)
+                .padding()
                 
                 Spacer()
                 
-                RoundRect()
-                    .padding(.trailing)
+                VStack(alignment: .center){
+                    TitleText(title: "AGE")
+                        
+                    numericText(num: "\(self.age)")
+                    
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .scaleEffect(2)
+                            .padding()
+                            .onTapGesture {
+                                self.age -= 1
+                            }
+                        
+                        Image(systemName: "plus.circle.fill")
+                            .scaleEffect(2)
+                            .padding()
+                            .onTapGesture {
+                                self.age += 1
+                            }
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.top)
+                .frame(width: 180, height: 250)
+                .background(Color.gray)
+                .cornerRadius(15)
+                .padding()
             }
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                
-                
-                Rectangle()
-                .frame(height: 50)
             
+            Button(action: {
+                //print("\(self.sliderVal)")
+                print("Button tapped")
+            }) {
+                Text("CALCULATE YOUR BMI")
+                .font(.callout)
+                .fontWeight(.medium)
+                .foregroundColor(Color.white)
+                .multilineTextAlignment(.center)
+                .frame(height: 50)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(Color.pink)
+                
             }
+            
         }
         
     }
@@ -59,16 +183,38 @@ struct ContentView: View {
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(sliderVal: 125, age: 18, weight: 50)
     }
 }
 #endif
 
 struct RoundRect: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 30)
-            .fill(Color.gray)
-            .frame(width: 180, height: 250)
-            .padding(.bottom)
+        VStack {
+            RoundedRectangle(cornerRadius: 30)
+                .fill(Color.gray)
+                .frame(width: 180, height: 250)
+                .padding(.bottom)
+            EmptyView()
+        }
+    }
+}
+
+struct TitleText: View {
+    var title = "HEIGHT"
+    var body: some View {
+        Text("\(title)")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+    }
+}
+
+struct numericText: View {
+    var num = "0"
+    var body: some View {
+        Text(num)
+            .font(.system(size: 45))
+            .font(.largeTitle)
+            .fontWeight(.heavy)
     }
 }
