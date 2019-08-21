@@ -9,16 +9,42 @@
 import SwiftUI
 
 struct ResultPage: View {
+    
+    @State var toggleView = false
+    
+    var body: some View {
+        ZStack {
+            
+            Button(action: {
+                self.toggleView.toggle()
+            }) {
+                Text("Calculate")
+            }
+            
+            //ContentView(sliderVal: 125, age: 18, weight: 50)
+            
+            ResultMenu(toggleView: $toggleView)
+                .rotation3DEffect(Angle(degrees: toggleView ? 0 : 40), axis: (x: 10.0, y: 0, z: 0))
+                .animation(.spring())
+                .offset(y: toggleView ? 0 : UIScreen.main.bounds.height)
+        }
+    }
+}
+
+#if DEBUG
+struct ResultPage_Previews: PreviewProvider {
+    static var previews: some View {
+        ResultPage()
+    }
+}
+#endif
+
+struct ResultMenu: View {
+    @Binding var toggleView: Bool
+    @State var show = false
+    
     var body: some View {
         VStack {
-            
-            HStack {
-                Text("BMI Calculator")
-                    .font(.system(size: 40))
-                    .fontWeight(.semibold)
-                    .padding(.leading)
-                Spacer()
-            }
             
             Spacer()
             
@@ -31,7 +57,7 @@ struct ResultPage: View {
                 Spacer()
             }
             .padding(.bottom)
-             //Spacer()
+            //Spacer()
             
             VStack(alignment: .center){
                 Text("NORMAL")
@@ -47,7 +73,9 @@ struct ResultPage: View {
                 
                 Text("Normal BMI Range:")
                 Text("18.5 - 25 kg/m2")
+                
                 Spacer()
+                
                 Text("You have normal body weight. Good Job!")
                     .font(.headline)
                     .frame(width: 220)
@@ -56,23 +84,29 @@ struct ResultPage: View {
                 
                 Button(action: {
                     print("result saved.")
+                    self.show.toggle()
                 }) {
                     Text("Save Result")
                         .foregroundColor(Color.white)
                 }
-                    .frame(width: 150, height: 50)
-                    .background(Color.pink)
-                    .cornerRadius(10)
+                .frame(width: 150, height: 50)
+                .background(Color.pink)
+                .cornerRadius(10)
                 .padding(.bottom)
+                .alert(isPresented: $show) {
+                    Alert(title: Text("Your result is saved successfully!"), message: nil, dismissButton: .cancel())
+                }.accentColor(Color.blue)
+                
             }
-                .frame(width: 350, height: 500)
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(radius: 30)
+            .frame(width: 350, height: 500)
+            .background(Color.white)
+            .cornerRadius(20)
+            .shadow(radius: 30)
             
             Spacer()
             Button(action: {
                 print("Buttom Tapped")
+                self.toggleView.toggle()
             }) {
                 Text("RE-CALCULATE YOUR BMI")
                     .foregroundColor(Color.white)
@@ -82,14 +116,10 @@ struct ResultPage: View {
             .background(Color.red)
             .cornerRadius(35)
             .padding()
+            
         }
+        .frame(width: 400, height: 700)
+        .background(Color("background"))
+        .cornerRadius(30)
     }
 }
-
-#if DEBUG
-struct ResultPage_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultPage()
-    }
-}
-#endif
